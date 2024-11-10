@@ -1,0 +1,21 @@
+:root{
+    --verde:#00A149;
+    --blanco:#fff;
+    --rojo:#881014;
+    --oscuro:#000;
+    --titulos:'Arima',cursive;
+    --parrafos:'Mulish', sans-serif;
+}
+html{
+    box-sizing: border-box;
+    /*1rem = 10px*/
+    font-size: 62.5%;
+}
+body{
+    font-size: 1.6rem;
+    overflow-x: hidden;
+}
+
+*,*::after, *::before{
+    box-sizing: inherit;
+}
