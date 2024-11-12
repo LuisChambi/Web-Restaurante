@@ -1,7 +1,8 @@
 :root{
-    --verde:#00A149;
+    --rojo:#d52b1e;
+    --amarillo:#ffd700;
+    --verde:#007a33;
     --blanco:#fff;
-    --rojo:#881014;
     --oscuro:#000;
     --titulos:'Arima',cursive;
     --parrafos:'Mulish', sans-serif;
@@ -18,4 +19,119 @@ body{
 
 *,*::after, *::before{
     box-sizing: inherit;
+}
+
+/*globales*/
+.contenedor{
+    max-width: 120rem;
+    margin: 0 auto;
+    width: 95%;
+}
+h1,h2{
+    font-family: var(--titulos);
+}
+h3, p, a{
+    font-family: var(--parrafos);
+}
+.rojo{
+    color: var(--rojo);
+}
+.amarillo{
+    color: var(--amarillo);
+}
+.verde{
+    color: var(--verde);
+}
+.ocultar{
+    display: none;
+}
+.btn-cerrar{
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--blanco);
+    position: absolute;
+    top: 0;
+    right: 50px;
+    user-select: none;
+}
+.pantalla-completa{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+}
+
+@keyframes desplazamiento{
+    0%{
+        transform: translateX(100%);
+    }
+
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.btn-cerrar:hover{
+    cursor: pointer;
+}
+/*encabezado*/
+.contenedor-navegacion{
+    background-color: var(--oscuro);
+    position: relative;
+    z-index: 5;
+}
+.contenido-navegacion{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo h2, .navegacion a{
+    color: var(--blanco);
+}
+.logo h2{
+    font-size: 3rem;
+}
+.navegacion a{
+    text-decoration: none;
+    font-size: 2.2rem;
+    padding: 1.5rem;
+    padding-left: 4rem;
+    display: block;
+    transition: color .3s ease-in-out;
+    text-align: center;
+}
+
+
+.navegacion a:nth-child(even):hover{
+    color: var(--verde);
+}
+.navegacion a:nth-child(odd):hover{
+    color: var(--rojo);
+}
+.navegacion a:first-of-type{
+    margin-top: 5rem;
+}
+.navegacion{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 40rem;
+    padding: 3rem, 4rem;
+    background-color: var(--oscuro);
+    animation: desplazamiento .5s ease-in-out;
+}
+
+.hamburguesa:hover{
+    cursor: pointer;
+}
+.hamburguesa span{
+    background-color: var(--blanco);
+    display: block;
+    width: 5rem;
+    height: .5rem;
+    margin-bottom: .5rem;
 }
