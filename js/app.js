@@ -1,9 +1,15 @@
 const menu = document.querySelector('.hamburguesa');
 const navegacion = document.querySelector('.navegacion');
 const imagenes = document.querySelectorAll('img');
+const btnTodos = document.querySelector('.todos');
+const btnEntradas = document.querySelector('.entradas');
+const btnPlatosFuertes = document.querySelector('.platosfuertes');
+const btnSopasCaldos = document.querySelector('.sopcal');
+const btnPostres = document.querySelector('.postres');
+const contenedorPlatillos = document.querySelector('.platillos');
 document.addEventListener('DOMContentLoaded',()=>{
     eventos();
-
+    platillos();
 });
 
 const eventos = () =>{
@@ -32,8 +38,19 @@ const botonCerrar = () =>{
     cerrarMenu(btnCerrar,overlay);
 
 }
+const observer = new IntersectionObserver((entries, observer)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            const imagen = entry.target;
+            imagen.src = imagen.dataset.src;
+            observer.unobserve(imagen);
+        }
+    });
+});
+
 imagenes.forEach(imagen=>{
-    imagen.src = imagen.dataset.src;
+    
+    observer.observe(imagen);
 });
 
 const cerrarMenu = (boton, overlay) =>{
@@ -47,5 +64,50 @@ const cerrarMenu = (boton, overlay) =>{
         overlay.remove();
         navegacion-classList.add('ocultar');
         boton.remove();
+    }
+}
+
+const platillos = () =>{
+    let platillosArreglo = [];
+    const platillos = document.querySelectorAll('.platillo');
+
+    platillos.forEach(platillo=> platillosArreglo = [...platillosArreglo,platillo]);
+
+    const entradas = platillosArreglo.filter(entrada=> entrada.getAttribute('data-platillo') === 'entrada');
+    const platosfuertes = platillosArreglo.filter(platofuerte => platofuerte.getAttribute('data-platillo') === 'platofuerte');    
+    const sopascaldos = platillosArreglo.filter(sopcal => sopcal.getAttribute('data-platillo') === 'sopcal');
+    const postres = platillosArreglo.filter(postre => postre.getAttribute('data-platillo') === 'postre');
+    
+    mostrarPlatillos(entradas, platosfuertes, sopascaldos, postres, platillosArreglo);
+}
+
+const mostrarPlatillos = (entradas, platosfuertes, sopascaldos, postres, todos) =>{
+    btnEntradas.addEventListener('click', ()=>{
+        limpiarHtml(contenedorPlatillos);
+        entradas.forEach(entrada=> contenedorPlatillos.appendChild(entrada));
+    });
+    btnPlatosFuertes.addEventListener('click', ()=>{
+        limpiarHtml(contenedorPlatillos);
+         platosfuertes.forEach(platosfuertes=> contenedorPlatillos.appendChild(platosfuertes));
+    });
+
+    btnSopasCaldos.addEventListener('click', ()=>{
+        limpiarHtml(contenedorPlatillos);
+        sopascaldos.forEach(sopcal=> contenedorPlatillos.appendChild(sopcal));
+    });
+    btnPostres.addEventListener('click', ()=>{
+        limpiarHtml(contenedorPlatillos);
+        postres.forEach(postre=> contenedorPlatillos.appendChild(postre));
+    });
+    btnTodos.addEventListener('click',()=>{
+        limpiarHtml(contenedorPlatillos);
+        todos.forEach(todos=> contenedorPlatillos.appendChild(todos));
+    });
+   
+}
+
+const limpiarHtml = (contenedor) =>{
+    while(contenedor.firstChild){
+        contenedor.removeChild(contenedor.firstChild);
     }
 }
